@@ -33,7 +33,7 @@ export class ProductInfo {
   @Column({ length: 50 })
   product_img: string;
 
-  @Column({ length: 50 })
+  @Column({array: true})
   product_tag: string;
 
   @ManyToOne(() => SellerInfo, (list) => list.seller_id)
