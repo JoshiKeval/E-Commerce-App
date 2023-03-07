@@ -5,9 +5,9 @@ export class AdminRegister {
   @PrimaryGeneratedColumn("increment")
   admin_id: number;
 
-  @Column({ length: 50 })
+  @Column()
   admin_email: string;
 
-  @Column({ length: 10 })
+  @Column()
   admin_password: string;
 }

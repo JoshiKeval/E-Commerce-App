@@ -13,37 +13,37 @@ export class SellerInfo {
   @PrimaryGeneratedColumn("increment")
   seller_id: number;
 
-  @Column({ length: 50 })
+  @Column()
   seller_name: string;
 
-  @Column({ length: 50 })
+  @Column({ unique: true })
   seller_email: string;
 
-  @Column({ length: 10 })
+  @Column()
   contact_no: string;
 
-  @Column({ length: 50 })
+  @Column()
   seller_password: string;
 
-  @Column({ length: 50 })
+  @Column({ unique: true })
   brand_name: string;
 
-  @Column({ length: 50 })
+  @Column()
   brand_type: string;
 
-  @Column({ length: 100 })
+  @Column()
   address: string;
 
-  @Column({ length: 50 })
+  @Column()
   gst_no: string;
 
-  @Column({ length: 50 })
+  @Column()
   pan_no: string;
 
-  @Column({ length: 50 })
+  @Column()
   bank_name: string;
 
-  @Column({ length: 50 })
+  @Column()
   brand_account_no: string;
 
   @Column()

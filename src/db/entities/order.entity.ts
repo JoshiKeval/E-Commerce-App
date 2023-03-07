@@ -12,12 +12,11 @@ export class Order {
   @PrimaryGeneratedColumn("uuid")
   order_id: number;
 
-  @Column({ length: 200 })
+  @Column()
   address: string;
 
-  @Column({ length: 10 })
+  @Column()
   contact_no: string;
-
 
   @ManyToOne(() => Cart, (list) => list.cart_id)
   @JoinColumn({ name: "product_id" })

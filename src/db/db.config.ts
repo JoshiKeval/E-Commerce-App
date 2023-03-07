@@ -6,6 +6,7 @@ import { SellerInfo } from "./entities/seller_info.entity";
 import { ProductInfo } from "./entities/product_info.entity";
 import { Cart } from "./entities/cart.entity";
 import { Order } from "./entities/order.entity";
+
 export const DbConnection = [
   {
     provide: "DataSource",
