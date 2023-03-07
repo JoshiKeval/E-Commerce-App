@@ -1,8 +1,6 @@
 import {
   Column,
   Entity,
-  JoinColumn,
-  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -11,7 +9,7 @@ import { ProductInfo } from "./product_info.entity";
 
 @Entity()
 export class SellerInfo {
-  @OneToMany(()=> ProductInfo,(list)=>list.seller_id)
+  @OneToMany(() => ProductInfo, (list) => list.seller_id)
   @PrimaryGeneratedColumn("increment")
   seller_id: number;
 
