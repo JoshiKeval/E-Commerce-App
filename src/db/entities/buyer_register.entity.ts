@@ -10,7 +10,7 @@ export class BuyerRegister {
   @Column()
   buyer_name: string;
 
-  @Column()
+  @Column({ unique: true })
   buyer_email: string;
 
   @Column()

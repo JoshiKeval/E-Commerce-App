@@ -18,7 +18,6 @@ export class Order {
   @Column()
   contact_no: string;
 
-
   @ManyToOne(() => Cart, (list) => list.cart_id)
   @JoinColumn({ name: "product_id" })
   cart_id: number;
