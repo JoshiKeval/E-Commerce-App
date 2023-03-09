@@ -5,7 +5,7 @@ export class AdminRegister {
   @PrimaryGeneratedColumn("increment")
   admin_id: number;
 
-  @Column()
+  @Column({ unique: true })
   admin_email: string;
 
   @Column()
