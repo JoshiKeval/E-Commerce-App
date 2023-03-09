@@ -7,12 +7,12 @@ export class BuyerRegister {
   @PrimaryGeneratedColumn("increment")
   buyer_id: number;
 
-  @Column({ length: 50 })
+  @Column()
   buyer_name: string;
 
-  @Column({ length: 50 })
+  @Column()
   buyer_email: string;
 
-  @Column({ length: 50 })
+  @Column()
   buyer_password: string;
 }

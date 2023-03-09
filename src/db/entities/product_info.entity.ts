@@ -15,22 +15,22 @@ export class ProductInfo {
   @PrimaryGeneratedColumn("increment")
   product_id: number;
 
-  @Column({ length: 50 })
+  @Column()
   product_name: string;
 
-  @Column({ length: 200 })
+  @Column()
   product_description: string;
 
-  @Column({ length: 20 })
+  @Column()
   product_type: string;
 
-  @Column({ length: 50 })
+  @Column()
   product_subtype: string;
 
   @Column()
   product_price: number;
 
-  @Column({ length: 50 })
+  @Column()
   product_img: string;
 
   @Column({array: true})
