@@ -20,7 +20,6 @@ import { UpdateSellerDto } from "src/dto/request/updateSeller.dto";
 import { SignUpResDto } from "src/dto/response/signUpRes.dto";
 import { SignInResDto } from "src/dto/response/signInRes.dto";
 import { UpdateResDto } from "src/dto/response/updateRes.dto";
-import { SignInDto } from "src/dto/request/signIn.dto";
 
 @Injectable()
 export class AuthService {

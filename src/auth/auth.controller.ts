@@ -20,6 +20,7 @@ import { SignUpResDto } from "src/dto/response/signUpRes.dto";
 import { UpdateResDto } from "src/dto/response/updateRes.dto";
 import { RoleGuard } from "src/role.guard";
 import { ROLE_CONSTANT } from "src/roleConstant";
+import { DataSource, Repository } from "typeorm";
 import { AuthService } from "./auth.service";
 
 @Controller("auth")
