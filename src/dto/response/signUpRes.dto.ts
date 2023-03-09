@@ -1,18 +1,14 @@
 import { IsNumber, IsString } from "class-validator";
 
-export class BuyerSignInResDto {
+export class SignUpResDto {
   @IsNumber()
   status: number;
 
   @IsString()
   msg: string;
 
-  @IsString()
-  token: string = null;
-
-  constructor(status, msg, token?) {
+  constructor(status, msg) {
     this.status = status;
     this.msg = msg;
-    this.token = token;
   }
 }

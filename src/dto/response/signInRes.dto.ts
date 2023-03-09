@@ -1,6 +1,6 @@
 import { IsNumber, IsString } from "class-validator";
 
-export class SellerSignInResDto {
+export class SignInResDto {
   @IsNumber()
   status: number;
 

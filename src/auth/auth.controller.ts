@@ -1,15 +1,23 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { AdminSignInDto } from "src/dto/request/adminSignIn.dto";
 import { BuyerSignInDto } from "src/dto/request/buyerSignIn.dto";
 import { BuyerSignUpDto } from "src/dto/request/buyerSignUp.dto";
 import { SellerSignInDto } from "src/dto/request/sellerSignIn.dto";
 import { SellerSignUpDto } from "src/dto/request/sellerSignUp.dto";
-import { AdminSignInResDto } from "src/dto/response/adminSignInRes.dto";
-import { BuyerSignInResDto } from "src/dto/response/buyerSignInRes.dto";
-import { BuyerSignUpResDto } from "src/dto/response/buyerSignUpRes.dto";
-import { SellerSignInResDto } from "src/dto/response/sellerSignInRes.dto";
-import { SellerSignUpResDto } from "src/dto/response/sellerSignUpRes.dto";
+import { UpdateBuyerDto } from "src/dto/request/updateBuyer.dto";
+import { UpdateSellerDto } from "src/dto/request/updateSeller.dto";
+import { SignInResDto } from "src/dto/response/signInRes.dto";
+import { SignUpResDto } from "src/dto/response/signUpRes.dto";
+import { UpdateResDto } from "src/dto/response/updateRes.dto";
 import { RoleGuard } from "src/role.guard";
 import { ROLE_CONSTANT } from "src/roleConstant";
 import { AuthService } from "./auth.service";
@@ -22,7 +30,7 @@ export class AuthController {
   sellerSignUp(
     @Body()
     sellerSignUpDto: SellerSignUpDto
-  ): Promise<SellerSignUpResDto> {
+  ): Promise<SignUpResDto> {
     return this.authService.sellerSignUp(sellerSignUpDto);
   }
 
@@ -30,28 +38,24 @@ export class AuthController {
   buyerSignUp(
     @Body()
     buyerSignUpDto: BuyerSignUpDto
-  ): Promise<BuyerSignUpResDto> {
+  ): Promise<SignUpResDto> {
     return this.authService.buyerSignUp(buyerSignUpDto);
   }
 
   @Post("/seller/signIn")
   sellerSignIn(
     @Body() sellerSignInDto: SellerSignInDto
-  ): Promise<SellerSignInResDto> {
+  ): Promise<SignInResDto> {
     return this.authService.sellerSignIn(sellerSignInDto);
   }
 
   @Post("/buyer/signIn")
-  buyerSignIn(
-    @Body() buyerSignInDto: BuyerSignInDto
-  ): Promise<BuyerSignInResDto> {
+  buyerSignIn(@Body() buyerSignInDto: BuyerSignInDto): Promise<SignInResDto> {
     return this.authService.buyerSignIn(buyerSignInDto);
   }
 
   @Post("/admin/signIn")
-  adminSignIn(
-    @Body() adminSignInDto: AdminSignInDto
-  ): Promise<AdminSignInResDto> {
+  adminSignIn(@Body() adminSignInDto: AdminSignInDto): Promise<SignInResDto> {
     return this.authService.adminSignIn(adminSignInDto);
   }
 
@@ -59,5 +63,25 @@ export class AuthController {
   @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.SELLER))
   seller(): string {
     return "THis is seller";
+  }
+
+  @Patch("/update/buyer")
+  @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.BUYER))
+  updateBuyer(
+    @Req() req,
+    @Body() updateBuyerDto: UpdateBuyerDto
+  ): Promise<UpdateResDto> {
+    const email = req.user.buyer_email;
+    return this.authService.updateBuyer(email, updateBuyerDto);
+  }
+
+  @Patch("/update/seller")
+  @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.SELLER))
+  updateSeller(
+    @Req() req,
+    @Body() updateSellerDto: UpdateSellerDto
+  ): Promise<UpdateResDto> {
+    const email = req.user.seller_email;
+    return this.authService.updateSeller(email, updateSellerDto);
   }
 }
