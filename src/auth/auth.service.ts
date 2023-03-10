@@ -24,7 +24,7 @@ import { SignInDto } from "src/dto/request/signIn.dto";
 
 @Injectable()
 export class AuthService {
-  private sellerRepo: Repository<SellerInfo>;
+  public sellerRepo: Repository<SellerInfo>;
   private buyerRepo: Repository<BuyerRegister>;
   private adminRepo: Repository<AdminRegister>;
   constructor(
@@ -150,9 +150,7 @@ export class AuthService {
   // adminSignIn -----------------------------------------------------
   async adminSignIn(adminSignInDto: AdminSignInDto): Promise<SignInResDto> {
     const { admin_email, admin_password } = adminSignInDto;
-
     const user = await this.adminRepo.findOneBy({ admin_email });
-
     if (user && (await bcrypt.compare(admin_password, user.admin_password))) {
       const role = ROLE_CONSTANT.ROLES.ADMIN;
       const payload: AdminJwtPayload = { admin_email, role };

@@ -38,5 +38,5 @@ export class ProductInfo {
 
   @ManyToOne(() => SellerInfo, (list) => list.seller_id)
   @JoinColumn({ name: "seller_id" })
-  seller_id: string;
+  seller_id: number;
 }

@@ -8,6 +8,7 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { ApiTags } from "@nestjs/swagger";
 import { AdminSignInDto } from "src/dto/request/adminSignIn.dto";
 import { BuyerSignInDto } from "src/dto/request/buyerSignIn.dto";
 import { BuyerSignUpDto } from "src/dto/request/buyerSignUp.dto";
@@ -22,6 +23,7 @@ import { RoleGuard } from "src/role.guard";
 import { ROLE_CONSTANT } from "src/roleConstant";
 import { AuthService } from "./auth.service";
 
+@ApiTags("Auth-Admin-Buyer-Seller")
 @Controller("auth")
 export class AuthController {
   constructor(private authService: AuthService) {}
