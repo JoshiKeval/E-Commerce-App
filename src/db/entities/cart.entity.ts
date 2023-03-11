@@ -14,18 +14,22 @@ import { ProductInfo } from "./product_info.entity";
 export class Cart {
   @OneToMany(() => Order, (list) => list.order_id)
   @PrimaryGeneratedColumn("increment")
+  id: number;
+
+  @Column()
   cart_id: number;
 
   @ManyToOne(() => BuyerRegister, (list) => list.buyer_id)
   @JoinColumn({ name: "buyer_id" })
-  buyer_id: string;
+  buyerregister: BuyerRegister;
+  @Column()
+  buyer_id: number;
 
   @ManyToOne(() => ProductInfo, (list) => list.product_id)
   @JoinColumn({ name: "product_id" })
-  product_id: number;
-
+  productinfo: ProductInfo;
   @Column()
-  seller_id: number;
+  product_id: number;
 
   @Column()
   quantity: number;
