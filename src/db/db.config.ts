@@ -27,7 +27,7 @@ export const DbConnection = [
           Cart,
           Order,
         ],
-        logging: true,
+        logging: false,
       });
 
       return await datasource.initialize();

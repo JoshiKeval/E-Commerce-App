@@ -10,12 +10,12 @@ import {
 export class SellerSignUpDto {
   @IsString()
   @MaxLength(50)
-  seller_name: string;
+  name: string;
 
   @IsString()
   @MaxLength(50)
   @IsEmail()
-  seller_email: string;
+  email: string;
 
   @IsString()
   @MaxLength(10)
@@ -24,7 +24,7 @@ export class SellerSignUpDto {
   @IsString()
   @MaxLength(50)
   @Matches(/((?=.*d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)
-  seller_password: string;
+  password: string;
 
   @IsString()
   @MaxLength(50)
