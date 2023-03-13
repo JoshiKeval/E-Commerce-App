@@ -112,7 +112,17 @@ export class AuthService {
 
     const user = await dbRepo.findOneBy({ email });
 
-    if (user.status == false) {
+    let flag;
+
+    try {
+      if (user.status == false) {
+        flag = false;
+      }
+    } catch (e) {
+      flag = true;
+    }
+
+    if (flag == false) {
       return new SignInResDto(401, "Mail Verification Pending");
     }
 
