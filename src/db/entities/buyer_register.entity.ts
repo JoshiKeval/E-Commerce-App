@@ -8,11 +8,11 @@ export class BuyerRegister {
   buyer_id: number;
 
   @Column()
-  buyer_name: string;
+  name: string;
 
   @Column({ unique: true })
-  buyer_email: string;
+  email: string;
 
   @Column()
-  buyer_password: string;
+  password: string;
 }

@@ -6,8 +6,8 @@ export class AdminRegister {
   admin_id: number;
 
   @Column({ unique: true })
-  admin_email: string;
+  email: string;
 
   @Column()
-  admin_password: string;
+  password: string;
 }

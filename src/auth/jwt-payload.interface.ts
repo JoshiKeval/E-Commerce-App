@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 //jwt
-export interface SellerJwtPayload {
-  seller_email: string;
+export interface JwtPayload {
+  email: string;
   role: string;
 }

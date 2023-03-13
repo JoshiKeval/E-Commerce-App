@@ -14,16 +14,16 @@ export class SellerInfo {
   seller_id: number;
 
   @Column()
-  seller_name: string;
+  name: string;
 
   @Column({ unique: true })
-  seller_email: string;
+  email: string;
 
   @Column()
   contact_no: string;
 
   @Column()
-  seller_password: string;
+  password: string;
 
   @Column({ unique: true })
   brand_name: string;
