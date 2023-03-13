@@ -7,10 +7,10 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Cart } from "./cart.entity";
-import { SellerInfo } from "./seller_info.entity";
+import { Seller } from "./seller_info.entity";
 
 @Entity()
-export class ProductInfo {
+export class Product {
   @OneToMany(() => Cart, (k) => k.product_id)
   @PrimaryGeneratedColumn("increment")
   product_id: number;
@@ -33,10 +33,10 @@ export class ProductInfo {
   @Column()
   product_img: string;
 
-  @Column({array: true})
+  @Column({ array: true })
   product_tag: string;
 
-  @ManyToOne(() => SellerInfo, (list) => list.seller_id)
+  @ManyToOne(() => Seller, (list) => list.seller_id)
   @JoinColumn({ name: "seller_id" })
   seller_id: number;
 }

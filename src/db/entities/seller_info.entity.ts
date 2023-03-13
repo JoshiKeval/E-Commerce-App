@@ -5,11 +5,11 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { ProductInfo } from "./product_info.entity";
+import { Product } from "./product_info.entity";
 
 @Entity()
-export class SellerInfo {
-  @OneToMany(() => ProductInfo, (list) => list.seller_id)
+export class Seller {
+  @OneToMany(() => Product, (list) => list.seller_id)
   @PrimaryGeneratedColumn("increment")
   seller_id: number;
 

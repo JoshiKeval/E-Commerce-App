@@ -21,7 +21,7 @@ import { ApiTags } from "@nestjs/swagger";
 import { request } from "express";
 import { diskStorage } from "multer";
 import path from "path";
-import { ProductInfo } from "src/db/entities/product_info.entity";
+import { Product } from "src/db/entities/product_info.entity";
 import { storage } from "src/db/storage.helper";
 import { AddProductDto } from "src/dto/request/addProduct.dto";
 import { UpdateProductDto } from "src/dto/request/updateProduct.dto";
@@ -59,7 +59,7 @@ export class SellerController {
     );
   }
 
-  @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.SELLER))
+  @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.ADMIN))
   @Get("/getallproducts")
   async GetAllProducts() {
     const getall = await this.sellerService.GetAllProducts();
@@ -68,7 +68,7 @@ export class SellerController {
 
   @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.SELLER))
   @Get("/:id")
-  async getTaskById(@Param("id") id: number): Promise<ProductInfo> {
+  async getTaskById(@Param("id") id: number): Promise<Product> {
     return await this.sellerService.getProductById(id);
   }
 

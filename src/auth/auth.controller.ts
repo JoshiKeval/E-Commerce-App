@@ -10,9 +10,9 @@ import {
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { AuthGuard } from "@nestjs/passport";
-import { AdminRegister } from "src/db/entities/admin_register.entity";
-import { BuyerRegister } from "src/db/entities/buyer_register.entity";
-import { SellerInfo } from "src/db/entities/seller_info.entity";
+import { Admin } from "src/db/entities/admin_register.entity";
+import { Buyer } from "src/db/entities/buyer_register.entity";
+import { Seller } from "src/db/entities/seller_info.entity";
 import { BuyerSignUpDto } from "src/dto/request/buyerSignUp.dto";
 import { SellerSignUpDto } from "src/dto/request/sellerSignUp.dto";
 import { SignInDto } from "src/dto/request/signIn.dto";
@@ -26,17 +26,17 @@ import { AuthService } from "./auth.service";
 // @ApiTags("Auth-Admin-Buyer-Seller")
 @Controller("auth")
 export class AuthController {
-  private sellerRepo: Repository<SellerInfo>;
-  private buyerRepo: Repository<BuyerRegister>;
-  private adminRepo: Repository<AdminRegister>;
+  private sellerRepo: Repository<Seller>;
+  private buyerRepo: Repository<Buyer>;
+  private adminRepo: Repository<Admin>;
   constructor(
     private authService: AuthService,
     @Inject("DataSource")
     private dataSource: DataSource
   ) {
-    this.sellerRepo = this.dataSource.getRepository(SellerInfo);
-    this.buyerRepo = this.dataSource.getRepository(BuyerRegister);
-    this.adminRepo = this.dataSource.getRepository(AdminRegister);
+    this.sellerRepo = this.dataSource.getRepository(Seller);
+    this.buyerRepo = this.dataSource.getRepository(Buyer);
+    this.adminRepo = this.dataSource.getRepository(Admin);
   }
 
   @Post("/seller/signUp")
@@ -69,7 +69,7 @@ export class AuthController {
 
   @Post("/admin/signIn")
   adminSignIn(@Body() signInDto: SignInDto) {
-    const role = ROLE_CONSTANT.ROLES.BUYER;
+    const role = ROLE_CONSTANT.ROLES.ADMIN;
     return this.authService.signIn(signInDto, role, this.adminRepo);
   }
 
@@ -90,4 +90,3 @@ export class AuthController {
 function ApiTags(arg0: string) {
   throw new Error("Function not implemented.");
 }
-

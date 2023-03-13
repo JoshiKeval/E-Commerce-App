@@ -7,7 +7,7 @@ import {
   Req,
 } from "@nestjs/common";
 import { AuthService } from "src/auth/auth.service";
-import { ProductInfo } from "src/db/entities/product_info.entity";
+import { Product } from "src/db/entities/product_info.entity";
 import { AddProductDto } from "src/dto/request/addProduct.dto";
 import { UpdateProductDto } from "src/dto/request/updateProduct.dto";
 import { AddProductRes } from "src/dto/response/addProductRes.dto";
@@ -17,12 +17,12 @@ import { DataSource, Repository } from "typeorm";
 
 @Injectable()
 export class SellerService {
-  private AddProductRepo: Repository<ProductInfo>;
+  private AddProductRepo: Repository<Product>;
   constructor(
     @Inject("DataSource") private dataSource: DataSource,
     public authService: AuthService
   ) {
-    this.AddProductRepo = this.dataSource.getRepository(ProductInfo);
+    this.AddProductRepo = this.dataSource.getRepository(Product);
   }
   /////////////////////////////////////////////////////////////////////add-product
 

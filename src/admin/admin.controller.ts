@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  UseGuards,
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { ApiTags } from "@nestjs/swagger";
 import { UpdateSellerStatusDto } from "src/dto/request/updatesellerstatus.dto";
@@ -8,7 +16,6 @@ import { RoleGuard } from "src/role.guard";
 import { ROLE_CONSTANT } from "src/roleConstant";
 
 import { AdminService } from "./admin.service";
-
 
 @ApiTags("Admin-Portal")
 @Controller("admin")
@@ -30,14 +37,9 @@ export class AdminController {
   ): Promise<UpdateMessageRes> {
     return this.adminService.UpdateStatus(id, updateSellerStatusDto);
   }
-  
 
   // @Delete("/deleteseller/:id")
   // DeleteProduct(@Param("id") id: number): Promise<DeleteSellerResDto> {
   //   return this.adminService.DeleteSeller(id);
   // }
-
-
-
-
 }

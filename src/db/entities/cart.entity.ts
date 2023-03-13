@@ -6,9 +6,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { BuyerRegister } from "./buyer_register.entity";
+import { Buyer } from "./buyer_register.entity";
 import { Order } from "./order.entity";
-import { ProductInfo } from "./product_info.entity";
+import { Product } from "./product_info.entity";
 
 @Entity()
 export class Cart {
@@ -16,18 +16,15 @@ export class Cart {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column()
-  cart_id: number;
-
-  @ManyToOne(() => BuyerRegister, (list) => list.buyer_id)
+  @ManyToOne(() => Buyer, (list) => list.buyer_id)
   @JoinColumn({ name: "buyer_id" })
-  buyerregister: BuyerRegister;
+  buyerregister: Buyer;
   @Column()
   buyer_id: number;
 
-  @ManyToOne(() => ProductInfo, (list) => list.product_id)
+  @ManyToOne(() => Product, (list) => list.product_id)
   @JoinColumn({ name: "product_id" })
-  productinfo: ProductInfo;
+  productinfo: Product;
   @Column()
   product_id: number;
 

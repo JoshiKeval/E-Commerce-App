@@ -1,9 +1,9 @@
 import { DataSource } from "typeorm";
 import { ConfigService } from "@nestjs/config";
-import { BuyerRegister } from "./entities/buyer_register.entity";
-import { AdminRegister } from "./entities/admin_register.entity";
-import { SellerInfo } from "./entities/seller_info.entity";
-import { ProductInfo } from "./entities/product_info.entity";
+import { Buyer } from "./entities/buyer_register.entity";
+import { Admin } from "./entities/admin_register.entity";
+import { Seller } from "./entities/seller_info.entity";
+import { Product } from "./entities/product_info.entity";
 import { Cart } from "./entities/cart.entity";
 import { Order } from "./entities/order.entity";
 
@@ -19,14 +19,7 @@ export const DbConnection = [
         password: configService.get("DB_PASSWORD"),
         database: configService.get("DB_NAME"),
         synchronize: true,
-        entities: [
-          BuyerRegister,
-          AdminRegister,
-          SellerInfo,
-          ProductInfo,
-          Cart,
-          Order,
-        ],
+        entities: [Buyer, Admin, Seller, Product, Cart, Order],
         logging: false,
       });
 

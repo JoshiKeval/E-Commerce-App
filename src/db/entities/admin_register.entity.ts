@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class AdminRegister {
+export class Admin {
   @PrimaryGeneratedColumn("increment")
   admin_id: number;
 

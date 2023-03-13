@@ -2,13 +2,13 @@ import { Injectable } from "@nestjs/common";
 import { SellerSignUpDto } from "src/dto/request/sellerSignUp.dto";
 import * as bcrypt from "bcryptjs";
 import { Inject } from "@nestjs/common/decorators/core/inject.decorator";
-import { SellerInfo } from "src/db/entities/seller_info.entity";
+import { Seller } from "src/db/entities/seller_info.entity";
 import { DataSource, Repository } from "typeorm";
 import { JwtService } from "@nestjs/jwt";
 import { BuyerSignUpDto } from "src/dto/request/buyerSignUp.dto";
-import { BuyerRegister } from "src/db/entities/buyer_register.entity";
+import { Buyer } from "src/db/entities/buyer_register.entity";
 import { JwtPayload } from "./jwt-payload.interface";
-import { AdminRegister } from "src/db/entities/admin_register.entity";
+import { Admin } from "src/db/entities/admin_register.entity";
 import { UpdateBuyerDto } from "src/dto/request/updateBuyer.dto";
 import { UpdateSellerDto } from "src/dto/request/updateSeller.dto";
 import { SignUpResDto } from "src/dto/response/signUpRes.dto";
@@ -18,17 +18,17 @@ import { SignInDto } from "src/dto/request/signIn.dto";
 
 @Injectable()
 export class AuthService {
-  public sellerRepo: Repository<SellerInfo>;
-  private buyerRepo: Repository<BuyerRegister>;
-  private adminRepo: Repository<AdminRegister>;
+  public sellerRepo: Repository<Seller>;
+  private buyerRepo: Repository<Buyer>;
+  private adminRepo: Repository<Admin>;
   constructor(
     @Inject("DataSource")
     private dataSource: DataSource,
     private readonly jwtService: JwtService
   ) {
-    this.sellerRepo = this.dataSource.getRepository(SellerInfo);
-    this.buyerRepo = this.dataSource.getRepository(BuyerRegister);
-    this.adminRepo = this.dataSource.getRepository(AdminRegister);
+    this.sellerRepo = this.dataSource.getRepository(Seller);
+    this.buyerRepo = this.dataSource.getRepository(Buyer);
+    this.adminRepo = this.dataSource.getRepository(Admin);
   }
 
   // sellerSignUp -----------------------------------------------------
