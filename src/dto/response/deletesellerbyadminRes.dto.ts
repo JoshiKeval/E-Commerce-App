@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class UpdateProductRes{
+export class DeleteSellerResDto{
   @ApiProperty({name:"message",description:"message",type:"string",required:true})
   message:string
 

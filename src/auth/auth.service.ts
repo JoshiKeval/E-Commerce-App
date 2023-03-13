@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { SellerSignUpDto } from "src/dto/request/sellerSignUp.dto";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 import { Inject } from "@nestjs/common/decorators/core/inject.decorator";
 import { SellerInfo } from "src/db/entities/seller_info.entity";
 import { DataSource, Repository } from "typeorm";
@@ -18,7 +18,7 @@ import { SignInDto } from "src/dto/request/signIn.dto";
 
 @Injectable()
 export class AuthService {
-  private sellerRepo: Repository<SellerInfo>;
+  public sellerRepo: Repository<SellerInfo>;
   private buyerRepo: Repository<BuyerRegister>;
   private adminRepo: Repository<AdminRegister>;
   constructor(

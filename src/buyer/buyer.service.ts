@@ -61,12 +61,9 @@ export class BuyerService {
           );
         }
         return new AddToCartResDto(201, "Product AddtoCart Successfully!");
-      } else {
-        console.log("Hello");
       }
     } catch {
       let cartArr = await this.cartRepo.find();
-      console.log("cartArr", cartArr);
       let b = undefined;
       try {
         if (cartArr[0] != undefined) {

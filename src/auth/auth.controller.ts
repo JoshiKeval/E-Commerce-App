@@ -23,6 +23,7 @@ import { ROLE_CONSTANT } from "src/roleConstant";
 import { DataSource, Repository } from "typeorm";
 import { AuthService } from "./auth.service";
 
+// @ApiTags("Auth-Admin-Buyer-Seller")
 @Controller("auth")
 export class AuthController {
   private sellerRepo: Repository<SellerInfo>;
@@ -86,3 +87,7 @@ export class AuthController {
     return this.authService.updateSeller(email, updateSellerDto);
   }
 }
+function ApiTags(arg0: string) {
+  throw new Error("Function not implemented.");
+}
+

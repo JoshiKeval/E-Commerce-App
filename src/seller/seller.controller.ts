@@ -12,10 +12,13 @@ import {
   FileTypeValidator,
   ParseFilePipe,
   UseGuards,
+  Req,
 } from "@nestjs/common";
 import { Put } from "@nestjs/common/decorators/http/request-mapping.decorator";
 import { AuthGuard } from "@nestjs/passport";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { ApiTags } from "@nestjs/swagger";
+import { request } from "express";
 import { diskStorage } from "multer";
 import path from "path";
 import { ProductInfo } from "src/db/entities/product_info.entity";
@@ -28,7 +31,7 @@ import { UpdateProductRes } from "src/dto/response/updateProductRes.dto";
 import { RoleGuard } from "src/role.guard";
 import { ROLE_CONSTANT } from "src/roleConstant";
 import { SellerService } from "./seller.service";
-
+@ApiTags("Seller-Portal-addproduct/getproduct/update/delete")
 @Controller("seller")
 export class SellerController {
   constructor(private sellerService: SellerService) {}
@@ -46,9 +49,14 @@ export class SellerController {
       })
     )
     file: Express.Multer.File,
-    @Body() addProductDto: AddProductDto
+    @Body() addProductDto: AddProductDto,
+    @Req() req: any
   ): Promise<AddProductRes> {
-    return this.sellerService.AddProduct(addProductDto, file.filename);
+    return this.sellerService.AddProduct(
+      addProductDto,
+      file.filename,
+      req.user.seller_email
+    );
   }
 
   @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.SELLER))
@@ -78,7 +86,4 @@ export class SellerController {
   DeleteProduct(@Param("id") id: number): Promise<DeleteProductRes> {
     return this.sellerService.DeleteProduct(id);
   }
-}
-function uuidv4() {
-  throw new Error("Function not implemented.");
 }

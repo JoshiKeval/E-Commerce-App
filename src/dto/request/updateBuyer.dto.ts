@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import {
   IsEmail,
   IsOptional,
@@ -11,6 +12,7 @@ export class UpdateBuyerDto {
   @IsOptional()
   @IsString()
   @MaxLength(50)
+  @ApiProperty({name:"update_name",description:"update_name",type:"string",required:true})
   update_name: string;
 
   // @IsOptional()
@@ -23,5 +25,6 @@ export class UpdateBuyerDto {
   @IsString()
   @MaxLength(50)
   @Matches(/((?=.*d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)
+  c
   update_password: string;
 }

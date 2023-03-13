@@ -4,7 +4,9 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  Req,
 } from "@nestjs/common";
+import { AuthService } from "src/auth/auth.service";
 import { ProductInfo } from "src/db/entities/product_info.entity";
 import { AddProductDto } from "src/dto/request/addProduct.dto";
 import { UpdateProductDto } from "src/dto/request/updateProduct.dto";
@@ -16,12 +18,22 @@ import { DataSource, Repository } from "typeorm";
 @Injectable()
 export class SellerService {
   private AddProductRepo: Repository<ProductInfo>;
-  constructor(@Inject("DataSource") private dataSource: DataSource) {
+  constructor(
+    @Inject("DataSource") private dataSource: DataSource,
+    public authService: AuthService
+  ) {
     this.AddProductRepo = this.dataSource.getRepository(ProductInfo);
   }
   /////////////////////////////////////////////////////////////////////add-product
 
-  async AddProduct(addData: AddProductDto,path) {
+  async AddProduct(addData: AddProductDto, path, userdata) {
+    console.log(userdata);
+    const found = await this.authService.sellerRepo.findOneBy({
+      email: userdata,
+    });
+
+    var sellerid = found.seller_id;
+    console.log("hellloooooooooo" + sellerid);
     let {
       product_name,
       product_description,
@@ -30,7 +42,6 @@ export class SellerService {
       product_price,
       product_img,
       product_tag,
-      seller_id,
     } = addData;
     const data = await this.AddProductRepo.create({
       product_name,
@@ -38,9 +49,9 @@ export class SellerService {
       product_type,
       product_subtype,
       product_price,
-      product_img:path,
+      product_img: path,
       product_tag,
-      seller_id,
+      seller_id: sellerid,
     });
     try {
       if (data) {
@@ -53,8 +64,6 @@ export class SellerService {
     } catch (error) {
       throw new BadRequestException(error);
     }
-
- 
   }
 
   ////////////////////////////////////////////////////////////////////////get-all-products
