@@ -23,7 +23,7 @@ export class BuyerService {
   async addToCart(
     addToCartDto: AddToCartDto,
     product_id,
-    buyer_email
+    email
   ): Promise<AddToCartResDto> {
     //get the productPrice by id
     const getProductPrice = await (
@@ -31,9 +31,7 @@ export class BuyerService {
     ).product_price;
 
     // get buyer id
-    const buyer_id = await (
-      await this.buyerRepo.findOneBy({ buyer_email })
-    ).buyer_id;
+    const buyer_id = await (await this.buyerRepo.findOneBy({ email })).buyer_id;
 
     let { quantity } = addToCartDto;
 

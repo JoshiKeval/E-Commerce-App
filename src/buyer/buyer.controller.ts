@@ -26,8 +26,8 @@ export class BuyerController {
     @Param("id", ParseIntPipe) id: number,
     @Body() addToCart: AddToCartDto
   ): Promise<AddToCartResDto> {
-    const buyer_email = req.user.buyer_email;
-    return this.buyerService.addToCart(addToCart, id, buyer_email);
+    const email = req.user.email;
+    return this.buyerService.addToCart(addToCart, id, email);
   }
 
   @UseGuards(AuthGuard("jwt"), new RoleGuard(ROLE_CONSTANT.ROLES.BUYER))
